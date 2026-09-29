@@ -69,9 +69,6 @@ filtered_df = df[
     (df["year_month"] <= selected_months[1])
 ]
 
-# Select the numeric columns that can be plotted
-numeric_columns = filtered_df.select_dtypes(include="number").columns
-
 # Create the plot
 fig, ax = plt.subplots()
 
