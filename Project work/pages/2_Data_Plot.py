@@ -37,7 +37,7 @@ df = df.sort_values("date_Id")
 # Select numerical columns that are relevant for plotting
 numeric_columns = df.select_dtypes(include="number").columns
 
-# Remove year and week because they are used as time information
+# Remove columns that are not measurement values that are natural to plot over time 
 numeric_columns = numeric_columns.drop(["iso_year", "iso_week", "area_number"])
 
 # Create a list with the columns that can be plotted
