@@ -14,8 +14,6 @@ df = load_data()
 # st.dataframe(df)
 #---------------------------------------------------
 
-df = load_data()
-
 # Rename columns to clear English names
 df = df.rename(columns={
     "dato_Id": "date_Id",
@@ -66,11 +64,14 @@ st.dataframe(
 
 #------------------------------------------------------------------
 st.caption(
-    "LineChartColumn() is only used for numerical columns. "
-    "Therefore, non-numerical columns like date_Id, area_type og next_publication_date, are not displayed as line charts."
+    "Line charts are only shown for relevant numerical measurement columns:"
 )
+
 # Select the numeric columns
 numeric_columns = first_month.select_dtypes(include="number").columns
+
+# Remove columns that are not measurement values
+numeric_columns = numeric_columns.drop(["area_number", "iso_year", "iso_week"])
 
 # Create one row for each numeric column
 chart_data = pd.DataFrame({
