@@ -33,8 +33,15 @@ df["date_Id"] = pd.to_datetime(df["date_Id"])
 df = df.sort_values("date_Id")
 
 #------------------------------------------------------------
-# Create a list with all columns
-column_options = ["All columns"] + list(df.columns)
+
+# Select numerical columns that are relevant for plotting
+numeric_columns = df.select_dtypes(include="number").columns
+
+# Remove year and week because they are used as time information
+numeric_columns = numeric_columns.drop(["iso_year", "iso_week"])
+
+# Create a list with the columns that can be plotted
+column_options = ["All columns"] + list(numeric_columns)
 
 # Dropdown menu for selecting a column
 selected_column = st.selectbox(
